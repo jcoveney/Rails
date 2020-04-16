@@ -43,6 +43,10 @@ public class GameLoader {
     }
 
     public static void loadAndStartGame(File gameFile) {
+        loadAndStartGameReturnUI(gameFile);
+    }
+
+    public static GameUIManager loadAndStartGameReturnUI(File gameFile) {
         SplashWindow splashWindow = new SplashWindow(true, gameFile.getAbsolutePath());
         splashWindow.notifyOfStep(SplashWindow.STEP_LOAD_GAME);
 
@@ -56,7 +60,7 @@ public class GameLoader {
             }
             catch (IOException e) {
                 log.warn("unable to load {}", gameFile);
-                return;
+                return null;
             }
         }
 
@@ -74,7 +78,7 @@ public class GameLoader {
                 String message = LocalText.getText("LOAD_FAILED_MESSAGE", e.getMessage());
                 JOptionPane.showMessageDialog(splashWindow.getWindow(), message, title, JOptionPane.ERROR_MESSAGE);
                 // in this case start of game cannot continued
-                return;
+                return null;
             }
         }
 
@@ -85,6 +89,7 @@ public class GameLoader {
 
         splashWindow.finalizeGameInit();
         gameUIManager.notifyOfSplashFinalization();
+        return gameUIManager;
     }
 
     public static GameUIManager startGameUIManager(RailsRoot game, boolean wasLoaded, SplashWindow splashWindow) {

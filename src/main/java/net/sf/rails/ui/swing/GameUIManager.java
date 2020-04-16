@@ -61,6 +61,7 @@ import net.sf.rails.ui.swing.elements.DialogOwner;
 import net.sf.rails.ui.swing.elements.MessageDialog;
 import net.sf.rails.ui.swing.elements.NonModalDialog;
 import net.sf.rails.ui.swing.elements.RadioButtonDialog;
+import net.sf.rails.util.PrintGame;
 import net.sf.rails.util.Util;
 import rails.game.action.DiscardTrain;
 import rails.game.action.ExchangeTokens;
@@ -1334,4 +1335,14 @@ public class GameUIManager implements DialogOwner {
         }
     }
 
+    public void printGameState() {
+        log.info("printing statusWindow");
+        PrintGame.printPanel(statusWindow.returnPanel(), "status_window.png");
+        log.info("printing mapPanel");
+        PrintGame.printPanel(orUIManager.getMapPanel(), "or_window.png");
+        //TODO print the stock chart
+
+        // lol is this is so horrible
+        System.exit(0);
+    }
 }

@@ -828,5 +828,7 @@ public class StatusWindow extends JFrame implements ActionListener, KeyListener,
        gameStatus.updatePlayerOrder(newPlayerNames);
     }
 
-
+    public JPanel returnPanel() {
+        return pane;
+    }
 }

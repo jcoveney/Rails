@@ -8,6 +8,7 @@ import javafx.stage.WindowEvent;
 import net.sf.rails.javafx.stockchart.FXStockChart;
 import net.sf.rails.ui.swing.GameUIManager;
 import net.sf.rails.ui.swing.StatusWindow;
+import net.sf.rails.util.PrintGame;
 
 import java.util.concurrent.Executors;
 
@@ -56,5 +57,6 @@ public class FXStockChartWindow extends Application {
         // TODO: save relocation and resizing information of the window
 
         stage = primaryStage;
+        PrintGame.printPanel(scene, "stock_market.png");
     }
 }

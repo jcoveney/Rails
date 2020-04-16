@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import net.sf.rails.algorithms.NetworkAdapter;
 import net.sf.rails.algorithms.NetworkGraph;
@@ -1668,4 +1669,8 @@ public class ORUIManager implements DialogOwner {
         return hexUpgrades;
     }
 
+    //TODO are there other panels to print here?
+    public JPanel getMapPanel() {
+        return mapPanel;
+    }
 }
