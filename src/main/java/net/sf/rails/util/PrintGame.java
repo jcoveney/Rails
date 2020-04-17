@@ -1,11 +1,11 @@
 package net.sf.rails.util;
 
 import java.awt.AWTException;
+import java.awt.Component;
 import java.awt.Robot;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 import net.sf.rails.common.ConfigManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,9 +46,9 @@ public class PrintGame {
     }
   }
 
-  public static void printPanel(JPanel panel, String _file) {
+  public static void printPanel(Component panel, String _file) {
     File file = new File(directory, _file);
-    log.info("printPanel with JPanel " + panel + "sent to file" + file);
+    log.info("printPanel with Component " + panel + "sent to file" + file);
     //TODO should have some logging
     BufferedImage imagebuf = null;
     try {

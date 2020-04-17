@@ -1339,8 +1339,27 @@ public class GameUIManager implements DialogOwner {
         log.info("printing statusWindow");
         PrintGame.printPanel(statusWindow.returnPanel(), "status_window.png");
         log.info("printing mapPanel");
-        PrintGame.printPanel(orUIManager.getMapPanel(), "or_window.png");
-        //TODO print the stock chart
+        PrintGame.printPanel(orUIManager.getOrWindow(), "or_window.png");
+
+        RoundFacade round = getCurrentRound();
+
+        String string = null;
+        String playerId = round.getRoot().getPlayerManager().getCurrentPlayer().getId();
+        if (round instanceof StockRound) {
+            StockRound sr = (StockRound)round;
+            string = "SR" + sr.getStockRoundNumber() + " - " + playerId;
+        } else if (round instanceof OperatingRound) {
+            OperatingRound or = (OperatingRound)round;
+            //TODO this is so gross, even for the horrible hacks here
+            String orNumber = or.toString().substring("OperatingRound ".length());
+            String company = or.getOperatingCompany().toString();
+            string = "OR" + orNumber + " - " + company + " (" + playerId  + ")";
+        } else {
+            //TODO look at other implementers and handle..auction?
+            throw new IllegalArgumentException("UNHANDLED ROUND: " + round);
+        }
+        log.info("round facade: " + string);
+        //TODO need to drump this to a file, then pick it up with the other app and put it in the email
 
         // lol is this is so horrible
         System.exit(0);
