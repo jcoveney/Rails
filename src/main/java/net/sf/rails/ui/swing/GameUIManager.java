@@ -1337,9 +1337,16 @@ public class GameUIManager implements DialogOwner {
 
     public void printGameState() {
         log.info("printing statusWindow");
-        PrintGame.printPanel(statusWindow.returnPanel(), "status_window.png");
-        log.info("printing mapPanel");
-        PrintGame.printPanel(orUIManager.getOrWindow(), "or_window.png");
+        Component statusPanel = statusWindow.returnPanel();
+        statusPanel.setVisible(true);
+        setMeToFront(statusWindow);
+        PrintGame.printPanel(statusPanel, "status_window.png");
+
+        log.info("printing or window");
+        ORWindow orWindowPanel = orUIManager.getOrWindow();
+        orWindowPanel.setVisible(true);
+        orWindowPanel.toFront();
+        PrintGame.printPanel(orWindowPanel, "or_window.png");
 
         RoundFacade round = getCurrentRound();
 
@@ -1359,6 +1366,7 @@ public class GameUIManager implements DialogOwner {
             throw new IllegalArgumentException("UNHANDLED ROUND: " + round);
         }
         log.info("round facade: " + string);
+        PrintGame.printRoundFacade(string);
         //TODO need to drump this to a file, then pick it up with the other app and put it in the email
 
         // lol is this is so horrible

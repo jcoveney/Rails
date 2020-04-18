@@ -5,6 +5,10 @@ import java.awt.Component;
 import java.awt.Robot;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.imageio.ImageIO;
 import net.sf.rails.common.ConfigManager;
 import org.slf4j.Logger;
@@ -35,6 +39,16 @@ public class PrintGame {
   //TODO this should be based on...literally anything else
   private static File directory = new File("/Users/jcoveney");
 
+  public static void printRoundFacade(String string) {
+    try {
+      Path writeLocation = new File(directory, "round_facade.txt").toPath();
+      log.info("Print round facade [" + string + "] to file: " + writeLocation);
+      Files.writeString(writeLocation, string);
+    } catch (IOException e) {
+      log.info("printRoundFacade", e);
+    }
+  }
+
   public static void printPanel(Scene scene, String _file) {
     File file = new File(directory, _file);
     log.info("printPanel with Scene " + scene + "sent to file" + file);
@@ -53,16 +67,15 @@ public class PrintGame {
     BufferedImage imagebuf = null;
     try {
         imagebuf = new Robot().createScreenCapture(panel.bounds());
-    } catch (AWTException e1) {
+    } catch (AWTException e) {
         // TODO Auto-generated catch block
-        e1.printStackTrace();
+        e.printStackTrace();
     }
      panel.paint(imagebuf.createGraphics());
      try {
         ImageIO.write(imagebuf, "png", file);
     } catch (Exception e) {
-        // TODO Auto-generated catch block
-        System.out.println("error");
+        e.printStackTrace();
     }
   }
 }

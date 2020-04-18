@@ -1668,7 +1668,7 @@ public class ORUIManager implements DialogOwner {
         return hexUpgrades;
     }
 
-    public Component getOrWindow() {
+    public ORWindow getOrWindow() {
         return orWindow;
     }
 }
