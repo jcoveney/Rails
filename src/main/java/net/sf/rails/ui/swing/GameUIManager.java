@@ -1371,6 +1371,8 @@ public class GameUIManager implements DialogOwner {
         PrintGame.printRoundFacade(string);
         //TODO need to drump this to a file, then pick it up with the other app and put it in the email
 
+        PrintGame.printGameReport(getRoot().getReportManager().getReportBuffer().getAsList());
+
         // lol is this is so horrible
         System.exit(0);
     }

@@ -4,8 +4,11 @@ import java.awt.AWTException;
 import java.awt.Component;
 import java.awt.Robot;
 import java.awt.image.BufferedImage;
+import java.util.List;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -46,6 +49,25 @@ public class PrintGame {
       Files.writeString(writeLocation, string);
     } catch (IOException e) {
       log.info("printRoundFacade", e);
+    }
+  }
+
+  public static void printGameReport(List<String> actions) {
+    Path writeLocation = new File(directory, "game_report.txt").toPath();
+    log.info("Print grame report to file: " + writeLocation);
+    boolean first = true;
+    try (BufferedWriter writer = Files.newBufferedWriter(writeLocation, Charset.forName("UTF-8"))) {
+      for (String action : actions) {
+        if (first) {
+          first = false;
+        } else {
+          writer.newLine();
+        }
+        writer.write(action);
+      }
+      writer.close();
+    } catch(IOException e) {
+      e.printStackTrace();
     }
   }
 
