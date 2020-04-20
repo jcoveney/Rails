@@ -1370,11 +1370,12 @@ public class GameUIManager implements DialogOwner {
         log.info("printing or window");
         ORWindow orWindowPanel = orUIManager.getOrWindow();
         if (currentRound instanceof StockRound) {
+            //TODO we are close! just need to resize the window...
             railsRoot.getGameManager().nextRound((StockRound) currentRound);
             updateUI();
+            orWindowPanel.setSize(1000, 1000);
             orWindowPanel.setVisible(true);
-            orWindowPanel.requestFocus();
-            //TODO perhaps do the same as in the OR case, just hide the companies window?
+            //orWindowPanel.requestFocus();
             PrintGame.printPanel(orWindowPanel.getMapPanel(), "or_window.png");
         } else {
             orWindowPanel.setVisible(true);
