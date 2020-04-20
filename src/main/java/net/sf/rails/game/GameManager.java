@@ -588,7 +588,7 @@ public class GameManager extends RailsManager implements Configurable, Owner {
         sr.start();
     }
 
-    protected void startOperatingRound(boolean operate) {
+    public void startOperatingRound(boolean operate) {
         log.debug("Operating round started with operate-flag={}", operate);
         String orId;
         if (operate) {

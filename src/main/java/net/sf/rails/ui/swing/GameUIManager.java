@@ -1338,18 +1338,6 @@ public class GameUIManager implements DialogOwner {
     }
 
     public void printGameState() {
-        log.info("printing statusWindow");
-        Component statusPanel = statusWindow.returnPanel();
-        statusPanel.setVisible(true);
-        setMeToFront(statusWindow);
-        PrintGame.printPanel(statusPanel, "status_window.png");
-
-        log.info("printing or window");
-        ORWindow orWindowPanel = orUIManager.getOrWindow();
-        orWindowPanel.setVisible(true);
-        orWindowPanel.toFront();
-        PrintGame.printPanel(orWindowPanel, "or_window.png");
-
         RoundFacade round = getCurrentRound();
 
         String string = null;
@@ -1372,6 +1360,27 @@ public class GameUIManager implements DialogOwner {
         //TODO need to drump this to a file, then pick it up with the other app and put it in the email
 
         PrintGame.printGameReport(getRoot().getReportManager().getReportBuffer().getAsList());
+
+        log.info("printing statusWindow");
+        Component statusPanel = statusWindow.returnPanel();
+        statusPanel.setVisible(true);
+        setMeToFront(statusWindow);
+        PrintGame.printPanel(statusPanel, "status_window.png");
+
+        log.info("printing or window");
+        ORWindow orWindowPanel = orUIManager.getOrWindow();
+        if (currentRound instanceof StockRound) {
+            railsRoot.getGameManager().nextRound((StockRound) currentRound);
+            updateUI();
+            orWindowPanel.setVisible(true);
+            orWindowPanel.requestFocus();
+            //TODO perhaps do the same as in the OR case, just hide the companies window?
+            PrintGame.printPanel(orWindowPanel.getMapPanel(), "or_window.png");
+        } else {
+            orWindowPanel.setVisible(true);
+            orWindowPanel.requestFocus();
+            PrintGame.printPanel(orWindowPanel, "or_window.png");
+        }
 
         // lol is this is so horrible
         System.exit(0);
