@@ -72,11 +72,11 @@ public class GameLoader {
             if (e instanceof RailsReplayException) {
                 String title = LocalText.getText("LOAD_INTERRUPTED_TITLE");
                 String message = LocalText.getText("LOAD_INTERRUPTED_MESSAGE", e.getMessage());
-                JOptionPane.showMessageDialog(splashWindow.getWindow(), message, title, JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(splashWindow.getWindow(), message, title, JOptionPane.ERROR_MESSAGE);
             } else {
                 String title = LocalText.getText("LOAD_FAILED_TITLE");
                 String message = LocalText.getText("LOAD_FAILED_MESSAGE", e.getMessage());
-                JOptionPane.showMessageDialog(splashWindow.getWindow(), message, title, JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(splashWindow.getWindow(), message, title, JOptionPane.ERROR_MESSAGE);
                 // in this case start of game cannot continued
                 return null;
             }

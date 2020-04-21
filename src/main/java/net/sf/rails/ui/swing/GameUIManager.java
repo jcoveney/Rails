@@ -1337,7 +1337,7 @@ public class GameUIManager implements DialogOwner {
         }
     }
 
-    public void printGameState() {
+    public void printGameState() throws IOException, AWTException {
         RoundFacade round = getCurrentRound();
 
         String string = null;

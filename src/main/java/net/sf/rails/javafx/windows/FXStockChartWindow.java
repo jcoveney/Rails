@@ -10,9 +10,15 @@ import net.sf.rails.ui.swing.GameUIManager;
 import net.sf.rails.ui.swing.StatusWindow;
 import net.sf.rails.util.PrintGame;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 import java.util.concurrent.Executors;
 
 public class FXStockChartWindow extends Application {
+    private static final Logger log = LoggerFactory.getLogger(FXStockChartWindow.class);
+
     private static GameUIManager gameUIManager;
 
     private static Stage stage;
@@ -57,6 +63,13 @@ public class FXStockChartWindow extends Application {
         // TODO: save relocation and resizing information of the window
 
         stage = primaryStage;
-        PrintGame.printPanel(scene, "stock_market.png");
+        try {
+            PrintGame.printPanel(scene, "stock_market.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error("Exception when printing stock market. Shutting it all down!");
+            // This is the worst
+            System.exit(1);
+        }
     }
 }
